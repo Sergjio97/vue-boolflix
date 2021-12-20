@@ -3,7 +3,9 @@
       <nav>
           <input type="text" placeholder="inserisci il titolo" v-model="inputValue">
           <button @click="searchFilm">Cerca</button>
-          <div class="films-info"></div>
+          <div class="films-info">
+              <h3 v-for="(film, index) in filmList" :key="index">{{film.title}}</h3>
+          </div>
       </nav>
   </main>
 </template>
