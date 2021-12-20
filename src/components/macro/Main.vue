@@ -3,6 +3,7 @@
       <nav>
           <input type="text" placeholder="inserisci il titolo" v-model="inputValue">
           <button @click="searchFilm">Cerca</button>
+          <div class="films-info"></div>
       </nav>
   </main>
 </template>
@@ -14,18 +15,21 @@ export default {
     data() {
         return {
             inputValue: '',
+            filmList: []
         }
     },
     methods: {
         searchFilm() {
-            axios.get('/user', {
+            axios.get('https://api.themoviedb.org/3/search/movie', {
                 params: {
                 api_key: 'eebcf7c938b9bfe34e05762eae2bec88',
-                query: this.inputValue
+                query: this.inputValue,
+                language: 'it-IT',
                 }
             })
-            .then(function (response) {
-                console.log(response);
+            .then((response)=> {
+                console.log(response.data.results);
+                this.filmList = response.data.results;
             })
             .catch(function (error) {
                 console.log(error);
