@@ -1,13 +1,12 @@
 <template>
   <main>
       <nav>
-          <input type="text" placeholder="inserisci il titolo" v-model="inputValue">
-          <button @click="searchFilm">Cerca</button>
+          <Header @search="searchFilm" @searchSeries="searchSeries"/>
           <div class="films-info" v-for="(film, index) in filmList" :key="index">
-              <h3>Titolo: {{film.title}}</h3>
-              <h3>Titolo Originale: {{film.original_title}}</h3>
-              <h3>Lingua: {{film.original_language}}</h3>
-              <h3>Valutazione: {{film.vote_average}}</h3>
+            <Filmcard :info="film"/> 
+          </div>
+          <div class="series-info" v-for="(serie, index) in seriesList" :key="index">
+            <Seriescard :info="serie"/> 
           </div>
       </nav>
   </main>
@@ -15,26 +14,51 @@
 
 <script>
 import axios from 'axios';
+import Header from './Header.vue';
+import Filmcard from '../elements/Filmcard.vue';
+import Seriescard from '../elements/Seriescard.vue'
+
 export default {
     name: 'Main',
+    components: {
+        Header,
+        Filmcard,
+        Seriescard
+    },
     data() {
         return {
-            inputValue: '',
-            filmList: []
+            filmList: [],
+            seriesList: []
         }
     },
     methods: {
-        searchFilm() {
+        searchFilm(payload) {
             axios.get('https://api.themoviedb.org/3/search/movie', {
                 params: {
                 api_key: 'eebcf7c938b9bfe34e05762eae2bec88',
-                query: this.inputValue,
+                query: payload,
                 language: 'it-IT',
                 }
             })
             .then((response)=> {
                 console.log(response.data.results);
                 this.filmList = response.data.results;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+        searchSeries(payload) {
+            axios.get('https://api.themoviedb.org/3/search/tv', {
+                params: {
+                api_key: 'eebcf7c938b9bfe34e05762eae2bec88',
+                query: payload,
+                language: 'it-IT',
+                }
+            })
+            .then((response)=> {
+                console.log(response.data.results);
+                this.seriesList = response.data.results;
             })
             .catch(function (error) {
                 console.log(error);
