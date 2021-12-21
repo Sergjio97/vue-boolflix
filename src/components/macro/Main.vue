@@ -28,10 +28,14 @@ export default {
     data() {
         return {
             filmList: [],
-            seriesList: []
+            seriesList: [],
+            flags: [
+                'en'
+            ]
         }
     },
     methods: {
+        // funzione per la ricerca dei film
         searchFilm(payload) {
             axios.get('https://api.themoviedb.org/3/search/movie', {
                 params: {
@@ -48,6 +52,7 @@ export default {
                 console.log(error);
             });
         },
+        // funzione per la ricerca delle serie tv
         searchSeries(payload) {
             axios.get('https://api.themoviedb.org/3/search/tv', {
                 params: {
@@ -63,7 +68,10 @@ export default {
             .catch(function (error) {
                 console.log(error);
             });
-        }
+        },
+        flagsConversion() {
+            console.log('funziona')
+        },
     }
 }
 </script>
