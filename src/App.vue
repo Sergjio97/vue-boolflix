@@ -64,4 +64,12 @@ export default {
 </script>
 
 <style lang="scss">
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+#app{
+  background-color:#1b1b1b;
+}
 </style>

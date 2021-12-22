@@ -20,4 +20,12 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+section {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  .contents-list{
+    width: 20%;
+  }
+}
 </style>
