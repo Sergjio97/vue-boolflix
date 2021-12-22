@@ -1,7 +1,10 @@
 <template>
   <header>
-    <input type="text" placeholder="inserisci il titolo" v-model="inputValue">
-    <button @click="$emit('search', inputValue), $emit('searchSeries', inputValue)">Cerca</button>
+    <img src="" alt="logo boolflix">
+    <nav>
+      <input type="text" placeholder="Inserisci il titolo" v-model="inputValue">
+      <button @click="$emit('search', inputValue), $emit('searchSeries', inputValue)">Cerca</button>
+    </nav>
   </header>
 </template>
 
@@ -17,5 +20,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+header{
+  display: flex;
+  justify-content: space-between;
+}
 </style>
